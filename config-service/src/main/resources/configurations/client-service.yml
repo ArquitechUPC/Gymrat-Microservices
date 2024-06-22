@@ -2,9 +2,9 @@ spring:
   application:
     name: client-service
   datasource:
-    username: root
-    password: root
-    url: jdbc:mysql://localhost:3306/securitydb?useSSL=false&serverTimezone=UTC
+    url: jdbc:mysql://${RAILWAY_DB_HOST}:${RAILWAY_DB_PORT}/${RAILWAY_DB_NAME}?useSSL=false&serverTimezone=UTC
+    username: ${RAILWAY_DB_USERNAME}
+    password: ${RAILWAY_DB_PASSWORD}
     driver-class-name: com.mysql.cj.jdbc.Driver
   jpa:
     database: mysql
@@ -12,12 +12,14 @@ spring:
     hibernate:
       ddl-auto: update
     show-sql: true
+
 server:
-  port: 8082
+  port: ${PORT:0}
 
 eureka:
+  instance:
+    instance-id: ${spring.application.name}:${spring.application.instance_id:${random.value}}
   client:
     service-url:
-      defaultZone: http://localhost:8761/eureka
-  instance:
-    hostname: localhost
+      defaultZone: http://localhost:8761/eureka/
+

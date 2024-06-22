@@ -1,5 +1,6 @@
 package org.Arquitech.Gymrat.clientservice;
 
+import io.github.cdimascio.dotenv.Dotenv;
 import io.swagger.v3.oas.annotations.OpenAPIDefinition;
 import io.swagger.v3.oas.annotations.info.Info;
 import org.springframework.boot.SpringApplication;
@@ -23,6 +24,14 @@ import org.springframework.scheduling.annotation.EnableScheduling;
 public class ClientServiceApplication {
 
 	public static void main(String[] args) {
+
+		Dotenv dotenv = Dotenv.load();
+		System.setProperty("RAILWAY_DB_HOST", dotenv.get("RAILWAY_DB_HOST"));
+		System.setProperty("RAILWAY_DB_PORT", dotenv.get("RAILWAY_DB_PORT"));
+		System.setProperty("RAILWAY_DB_NAME", dotenv.get("RAILWAY_DB_NAME"));
+		System.setProperty("RAILWAY_DB_USERNAME", dotenv.get("RAILWAY_DB_USERNAME"));
+		System.setProperty("RAILWAY_DB_PASSWORD", dotenv.get("RAILWAY_DB_PASSWORD"));
+
 		SpringApplication.run(ClientServiceApplication.class, args);
 	}
 
