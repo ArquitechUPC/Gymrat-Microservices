@@ -1,6 +1,7 @@
 package org.Arquitech.Gymrat.admin.Admin.domain.model.entity;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotNull;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -13,6 +14,6 @@ public class Admin {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
-    @ManyToOne(fetch = FetchType.EAGER, optional = false)
-    private Company companyId;
+    @NotNull
+    private Integer givenUser;
 }

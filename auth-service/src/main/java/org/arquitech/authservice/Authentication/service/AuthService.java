@@ -64,7 +64,7 @@ public class AuthService {
                 .build();
     }
 
-    public AuthResponse register(RegisterRequest request) {
+    public Integer register(RegisterRequest request) {
         User user = User.builder()
                 .username(request.getUsername())
                 .email(request.getEmail())
@@ -77,11 +77,17 @@ public class AuthService {
                 .role(Role.ADMIN)
                 .build();
 
-        userRepository.save(user);
 
-        return AuthResponse.builder()
+        userRepository.save(user);/*AuthResponse.builder()
                 .token(jwtService.getToken(user))
-                .build();
+                .build();*/
+
+        return user.getId();
+//        userRepository.save(user);
+//
+//        return AuthResponse.builder()
+//                .token(jwtService.getToken(user))
+//                .build();
     }
 
     public List<UsersInfoResponse> getUsersByCompanyIdAndRole(Integer companyId, Role role) {

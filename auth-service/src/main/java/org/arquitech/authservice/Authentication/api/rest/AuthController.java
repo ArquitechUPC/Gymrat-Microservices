@@ -32,16 +32,16 @@ public class AuthController {
         return ResponseEntity.ok(authService.changePassword(request));
     }
 
-    @Operation(summary = "Register", description = "Register to the application")
-    @PostMapping("/register-admin")
-    public ResponseEntity<AuthResponse> register(@RequestBody RegisterRequest request) {
-        return ResponseEntity.ok(authService.register(request));
-    }
-
     @Operation(summary = "Get user", description = "Get users info")
     @GetMapping("/get-clients-info")
     public ResponseEntity<List<UsersInfoResponse>> get(@RequestParam Integer companyId) {
         return ResponseEntity.ok(authService.getUsersByCompanyIdAndRole(companyId, Role.USER));
+    }
+
+    @Operation(summary = "Register", description = "Register to the application")
+    @PostMapping("/register-admin")
+    public ResponseEntity<?> register(@RequestBody RegisterRequest request) {
+        return ResponseEntity.ok(authService.register(request));
     }
 
     @PostMapping("/register-client")

@@ -2,6 +2,7 @@ package org.Arquitech.Gymrat.clientservice.Client.service;
 
 import jakarta.validation.ConstraintViolation;
 import jakarta.validation.Validator;
+import org.Arquitech.Gymrat.clientservice.Client.client.AdminClient;
 import org.Arquitech.Gymrat.clientservice.Client.client.ClassClient;
 import org.Arquitech.Gymrat.clientservice.Client.client.PlanClient;
 import org.Arquitech.Gymrat.clientservice.Client.client.UserClient;
@@ -42,6 +43,9 @@ public class ClientServiceImpl implements ClientService {
     private ClientRepository clientRepository;
 
     @Autowired
+    private AdminClient adminClient;
+
+    @Autowired
     private UserClient userClient;
 
     @Autowired
@@ -60,11 +64,12 @@ public class ClientServiceImpl implements ClientService {
     @Autowired
     private Validator validator;
 
-    public ClientServiceImpl(ClientRepository clientRepository, UserClient userClient, PlanClient planClient,ClassClient classClient,/*UserRepository userRepository,*/ GoalRepository goalRepository, MeasurementRepository measurementRepository, Validator validator) {
+    public ClientServiceImpl(ClientRepository clientRepository, UserClient userClient, PlanClient planClient,ClassClient classClient, AdminClient adminClient,/*UserRepository userRepository,*/ GoalRepository goalRepository, MeasurementRepository measurementRepository, Validator validator) {
         this.clientRepository = clientRepository;
         this.userClient = userClient;
         this.planClient = planClient;
         this.classClient = classClient;
+        this.adminClient = adminClient;
         //this.userRepository = userRepository;
         this.goalRepository = goalRepository;
         this.measurementRepository = measurementRepository;
@@ -167,6 +172,7 @@ public class ClientServiceImpl implements ClientService {
 
     @Override
     public Integer obtainUserId(String username, String email, String password, String phoneNumber, String address, String city, Integer companyId) {
+        adminClient.existCompany(companyId).orElseThrow(() -> new CustomException("Company not found", HttpStatus.NOT_FOUND));
         RequestUserCompany request = new RequestUserCompany();
         request.setUsername(username);
         request.setEmail(email);
