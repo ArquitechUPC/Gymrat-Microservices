@@ -8,6 +8,11 @@ services:
       - "8888:8888"
     networks:
       - gymrat-network
+    healthcheck:
+      test: ["CMD-SHELL", "curl -f http://localhost:8888/actuator/health || exit 1"]
+      interval: 30s
+      timeout: 10s
+      retries: 5
 
   eureka-service:
     build:
@@ -16,7 +21,22 @@ services:
     depends_on:
       - config-service
     ports:
-      - "8761:8761"    
+      - "8761:8761"
+    networks:
+      - gymrat-network
+    healthcheck:
+      test: ["CMD-SHELL", "curl -f http://localhost:8761/actuator/health || exit 1"]
+      interval: 30s
+      timeout: 10s
+      retries: 5
+
+  auth-service:
+    build:
+      context: ./auth-service
+      dockerfile: Dockerfile
+    depends_on:
+      - config-service
+      - eureka-service
     networks:
       - gymrat-network
 
