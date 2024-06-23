@@ -1,0 +1,25 @@
+version: '3'
+services:
+  config-service:
+    build:
+      context: ./config-service
+      dockerfile: Dockerfile
+    ports:
+      - "8888:8888"
+    networks:
+      - gymrat-network
+
+  eureka-service:
+    build:
+      context: ./eureka-service
+      dockerfile: Dockerfile
+    depends_on:
+      - config-service
+    ports:
+      - "8761:8761"    
+    networks:
+      - gymrat-network
+
+networks:
+  gymrat-network:
+    driver: bridge
