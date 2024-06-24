@@ -70,7 +70,9 @@ public class ClassController {
 
     @PostMapping
     public ClassResource save(@RequestBody CreateClassResource resource) {
-        return this.mapper.toResource(classService.save(this.mapper.toModel(resource)));
+        Class aux = this.mapper.toModel(resource);
+        aux.setGivenCompany(resource.getGivenCompany());
+        return this.mapper.toResource(classService.save(aux));
     }
 
     @Operation(summary = "Update a class by  id", responses = {

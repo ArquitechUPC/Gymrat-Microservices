@@ -63,6 +63,6 @@ public class Class {
 
     @NotNull
     @Column(nullable = false)
-    private Integer companyId;
+    private Integer givenCompany;
 
 }

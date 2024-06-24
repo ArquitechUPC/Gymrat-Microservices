@@ -30,6 +30,6 @@ public class CreateClassResource {
     @NotNull
     private  Integer coachId;
     @NotNull
-    private Integer companyId;
+    private Integer givenCompany;
 
 }

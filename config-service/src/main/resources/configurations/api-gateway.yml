@@ -39,3 +39,9 @@ spring:
 eureka:
   client:
     register-with-eureka: false
+
+logging:
+  level:
+    org.springframework.web.reactive: DEBUG
+    org.springframework.http.server.reactive: DEBUG
+    org.springframework.cloud.gateway: DEBUG

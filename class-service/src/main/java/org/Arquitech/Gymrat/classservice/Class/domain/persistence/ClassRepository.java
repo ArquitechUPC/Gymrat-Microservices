@@ -8,5 +8,5 @@ import java.util.List;
 
 @Repository
 public interface ClassRepository extends JpaRepository<Class, Integer> {
-    List<Class> findByCompanyId(Integer companyId);
+    List<Class> findByGivenCompany(Integer companyId);
 }

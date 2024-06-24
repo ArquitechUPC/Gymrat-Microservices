@@ -54,10 +54,6 @@ public class ClassServiceImpl implements ClassService {
     @Override
     public Class save(Class aClass) {
         aClass.setActualCapacity(aClass.getCapacity());
-        Set<ConstraintViolation<Class>> violations = validator.validate(aClass);
-        if (!violations.isEmpty()) {
-            throw new CustomException("Error", HttpStatus.NOT_FOUND);
-        }
         if(trainerClass.trainerAvailability(aClass.getCoachId())){
           return classRepository.save(aClass);
         }
@@ -105,7 +101,7 @@ public class ClassServiceImpl implements ClassService {
 
     @Override
     public List<Class> fetchByCompanyId(Integer companyId) {
-        return classRepository.findByCompanyId(companyId);
+        return classRepository.findByGivenCompany(companyId);
     }
 
     @Override

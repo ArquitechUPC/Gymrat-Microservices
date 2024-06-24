@@ -22,5 +22,5 @@ public class ClassResource {
     private String level;
     private String room;
     private  Integer coachId;
-    private Integer companyId;
+    private Integer givenCompany;
 }
