@@ -15,6 +15,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Service
@@ -148,6 +149,16 @@ public class AuthService {
 
     public boolean findUserById(Integer id) {
         return userRepository.existsById(id);
+    }
+
+    public Optional<UsersInfoResponse> findByUserId(Integer id){
+        User aux = userRepository.findById(id).get();
+        UsersInfoResponse user = new UsersInfoResponse();
+        user.setCompanyId(aux.getCompanyId());
+        user.setEmail(aux.getEmail());
+        user.setUsername(aux.getUsername());
+        user.setPhoneNumber(aux.getPhoneNumber());
+        return Optional.of(user);
     }
 
 }

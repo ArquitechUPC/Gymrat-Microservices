@@ -29,5 +29,7 @@ public class CreateClassResource {
     private String room;
     @NotNull
     private  Integer coachId;
+    @NotNull
+    private Integer companyId;
 
 }

@@ -15,4 +15,5 @@ public interface ClassService {
 
     Class increasesVacancy(Integer id);
     List<Class> fetchByClient(Integer id);
+    List<Class> fetchByCompanyId(Integer companyId);
 }

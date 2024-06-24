@@ -38,6 +38,17 @@ public class ClassController {
     @GetMapping
     public List<Class> fetchAll() {return classService.fetchAll();}
 
+    @Operation(summary = "Get all registered classes by company", responses = {
+            @ApiResponse(description = "Successfully fetched all classes by company",
+                    responseCode = "201",
+                    content = @Content(mediaType = "application/json",
+                            schema = @Schema(implementation = ClassResource.class)))
+    })
+
+    @GetMapping("/company/{companyId}")
+    public List<Class> fetchByCompanyId(@PathVariable Integer companyId) {return classService.fetchByCompanyId(companyId);}
+
+
     @Operation(summary = "Get a class by id", responses = {
             @ApiResponse(description = "Successfully fetched plan by id",
             responseCode = "201",

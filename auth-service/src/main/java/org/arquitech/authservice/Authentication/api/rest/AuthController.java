@@ -11,6 +11,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Optional;
 
 @Tag(name = "auth", description = "the auth API")
 @RestController
@@ -57,6 +58,11 @@ public class AuthController {
     @GetMapping("/exist-user/{id}")
     public ResponseEntity<?> findUserById(@PathVariable Integer id) {
         return ResponseEntity.ok(authService.findUserById(id));
+    }
+
+    @GetMapping("/{id}")
+    public ResponseEntity<Optional<UsersInfoResponse>> getById(@PathVariable Integer id){
+        return ResponseEntity.ok(authService.findByUserId(id));
     }
 
 }

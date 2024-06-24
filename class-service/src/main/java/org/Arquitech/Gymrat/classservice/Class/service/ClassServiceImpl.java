@@ -104,6 +104,11 @@ public class ClassServiceImpl implements ClassService {
     }
 
     @Override
+    public List<Class> fetchByCompanyId(Integer companyId) {
+        return classRepository.findByCompanyId(companyId);
+    }
+
+    @Override
     public Class updateVacancy(Integer id) {
         Class aux = classRepository.findById(id).get();
         aux.setActualCapacity((aux.getActualCapacity().intValue())-1);

@@ -61,6 +61,8 @@ public class Class {
     @Column(nullable = false)
     private  Integer coachId;
 
-
+    @NotNull
+    @Column(nullable = false)
+    private Integer companyId;
 
 }

@@ -55,4 +55,6 @@ public class UpdateClassResource {
 
     @NotNull
     private  Integer coachId;
+
+    private Integer companyId;
 }
